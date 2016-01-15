@@ -1,7 +1,5 @@
-machine:
-  sbt:
-    version: 0.13.9
 
 test:
   override:
-    - scala hello.sc
+    - which sbt
+    - which scalas
