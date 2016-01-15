@@ -3,4 +3,6 @@ test:
   override:
     - sbt test
   post:
-     - sbt package && java -jar `sbt --error "export packageBin::artifactPath"`
+     - sbt package
+     - sbt --error "export packageBin::artifactPath"
+     - java -jar `sbt --error "export packageBin::artifactPath"`
