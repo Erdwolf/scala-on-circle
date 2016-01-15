@@ -1,3 +1,6 @@
+machine:
+  - scala
+
 test:
   override:
     - scala hello.sc
