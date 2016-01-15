@@ -2,8 +2,9 @@
 test:
   override:
     - sbt --version
+    - sbt --sbt-version
     - sbt test
   post:
      - sbt package
-     - sbt --warn "export packageBin::artifactPath"
-     - java -jar `sbt --warn "export packageBin::artifactPath"`
+     - sbt --error "export packageBin::artifactPath"
+     - java -jar `sbt --error "export packageBin::artifactPath"`
