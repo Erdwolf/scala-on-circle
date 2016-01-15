@@ -1,4 +1,6 @@
 
 test:
   override:
-    - sbt run
+    - sbt test
+  post:
+     - sbt package && java -jar `sbt --error "export packageBin::artifactPath"`
