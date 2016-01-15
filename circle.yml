@@ -1,10 +1,9 @@
 
 test:
   override:
-    - sbt --version
-    - sbt --sbt-version
+    - sbt scalaVersion
     - sbt test
   post:
-     - sbt package
-     - sbt --error "export packageBin::artifactPath"
-     - java -jar `sbt --error "export packageBin::artifactPath"`
+    - sbt package
+    - sbt "export packageBin::artifactPath"
+    - java -jar `sbt "export packageBin::artifactPath"|tail -n1`
