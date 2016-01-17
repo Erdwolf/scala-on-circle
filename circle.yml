@@ -5,12 +5,6 @@ test:
     - sbt test
   post:
     - sbt assembly
-    - sbt "export assemblyJarName"
-    - sbt "export assemblyOutputPath"
-    - sbt "export assembly::assemblyJarName"
-    - sbt "export assembly::assemblyOutputPath"
-    - sbt "export assemblyBin::assemblyJarName"
-    - sbt "export assemblyBin::assemblyOutputPath"
-    - sbt "export assemblyBin::artifactPath"
-    - sbt "export packageBin::artifactPath"
-    - java -jar `sbt "export packageBin::artifactPath"|tail -n1`
+    - sbt "show assembly::assemblyJarName"
+    - sbt "show assembly::assemblyOutputPath"
+    - java -jar target/scala-2.10/scala-on-circle-assembly-0.1-SNAPSHOT.jar
