@@ -4,6 +4,13 @@ test:
     - sbt scalaVersion
     - sbt test
   post:
-    - sbt package
+    - sbt assembly
+    - sbt "export assemblyJarName"
+    - sbt "export assemblyOutputPath"
+    - sbt "export assembly::assemblyJarName"
+    - sbt "export assembly::assemblyOutputPath"
+    - sbt "export assemblyBin::assemblyJarName"
+    - sbt "export assemblyBin::assemblyOutputPath"
+    - sbt "export assemblyBin::artifactPath"
     - sbt "export packageBin::artifactPath"
     - java -jar `sbt "export packageBin::artifactPath"|tail -n1`
