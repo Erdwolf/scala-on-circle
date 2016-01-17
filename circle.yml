@@ -7,10 +7,5 @@ test:
     - sbt test
   post:
     - sbt assembly
-    - sbt "export assembly::assemblyOutputPath"
-    - find target -name "*.jar"
-    - java -jar `sbt "export assembly::assemblyOutputPath"|tail -n1`
-
-general:
-  artifacts:
-    - "target/**/*.jar"
+    - cp `find target -name "*.jar"` $CIRCLE_ARTIFACTS
+    - java -jar `find target -name "*.jar"`
