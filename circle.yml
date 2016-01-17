@@ -7,4 +7,5 @@ test:
     - sbt test
   post:
     - sbt assembly
-    - java -jar sbt `sbt "export assembly::assemblyOutputPath"|tail -n1`
+    - cp `sbt "export assembly::assemblyOutputPath"|tail -n1` $CIRCLE_ARTIFACTS/
+    - java -jar `sbt "export assembly::assemblyOutputPath"|tail -n1`
