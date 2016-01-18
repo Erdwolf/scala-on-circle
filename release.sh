@@ -1,1 +1,1 @@
-curl --data '{"tag_name": "v0.0.1","target_commitish": "master","name": "v1.0.0","body": "Release of version 1.0.0","draft": false,"prerelease": false}' https://api.github.com/repos/Erdwolf/scala-on-circle/releases
+curl --data '{"tag_name": "v0.0.1","target_commitish": "master","name": "v1.0.0","body": "Release of version 1.0.0","draft": false,"prerelease": false}' https://api.github.com/repos/Erdwolf/scala-on-circle/releases?access_token=$GITHUB_TOKEN
