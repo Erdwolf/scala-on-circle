@@ -12,4 +12,6 @@ test:
 
 deployment:
   github:
+    branch: master
+    commands:
      - ./release.sh `find target -name "*.jar"`
