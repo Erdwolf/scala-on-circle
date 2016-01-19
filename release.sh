@@ -1,6 +1,6 @@
 #/bin/sh
-asset_path=$1
-[ -f $asset_path ] || {
+asset_path="$1"
+[ -n "$asset_path" -a -f $asset_path ] || {
   echo "asset path '$asset_path' not found!"
   exit 1
 }
