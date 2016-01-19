@@ -8,10 +8,10 @@ test:
   post:
     - sbt assembly
     - cp `find target -name "*.jar"` $CIRCLE_ARTIFACTS/scala-on-circle.jar
-    - java -jar `find $CIRCLE_ARTIFACTS -name "*.jar"`
+    - java -jar `find target -name "*.jar"`
 
 deployment:
   github:
     branch: master
     commands:
-       - ./release.sh `find $CIRCLE_ARTIFACTS -name "*.jar"`
+       - ./release.sh `find target -name "*.jar"`
