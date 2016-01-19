@@ -7,7 +7,7 @@ test:
     - sbt test
   post:
     - sbt assembly
-    - cp `find target -name "*.jar"` $CIRCLE_ARTIFACTS/scala-on-circle.jar
+    - cp `find target -name "*.jar"` $CIRCLE_ARTIFACTS/
     - java -jar `find target -name "*.jar"`
 
 deployment:
