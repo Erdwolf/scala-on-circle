@@ -14,4 +14,4 @@ deployment:
   github:
     branch: master
     commands:
-     - ./release.sh `find $CIRCLE_ARTIFACTS "*.jar"`
+       - ./release.sh `find $CIRCLE_ARTIFACTS -name "*.jar"`

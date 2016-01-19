@@ -1,5 +1,9 @@
 #/bin/sh
 asset_path=$1
+[ -e asset_path ] || {
+  echo "asset path '$asset_path' not found!"
+  exit 1
+}
 
 auth_header="Authorization: token $GITHUB_TOKEN"
 
