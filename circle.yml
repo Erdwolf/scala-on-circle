@@ -1,4 +1,15 @@
+dependencies:
+  override:
+    - sbt update
 
 test:
   override:
-    - ./release.sh
+    - sbt test
+  post:
+    - sbt assembly
+    - cp `find target -name "*.jar"` $CIRCLE_ARTIFACTS
+    - java -jar `find target -name "*.jar"`
+
+deployment:
+  github:
+     - ./release.sh `find target -name "*.jar"`

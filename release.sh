@@ -1,6 +1,51 @@
 #/bin/sh
-#curl --data "{\"tag_name\": \"build-$CIRCLE_BUILD_NUM\"}" https://api.github.com/repos/Erdwolf/scala-on-circle/releases?access_token=$GITHUB_TOKEN > response.json
-#cat response.json
-#release_id=`python -c 'import json; print json.load(file("response.json"))["id"]'`
-#echo "Uploading asset for release $release_id..."
-curl --header "Content-Type: application/java-archive; Authorization: token $GITHUB_TOKEN" --data "blablabla" https://uploads.github.com/repos/Erdwolf/scala-on-circle/releases/2448300/assets?name=foo.jar
+auth_header="Authorization: token $GITHUB_TOKEN"
+
+echo "Creating release..."
+echo
+request='{
+  "tag_name": "build-'$CIRCLE_BUILD_NUM'",
+  "name": "Build #'$CIRCLE_BUILD_NUM'",
+  "body": "Automatically released after successful build."
+}'
+echo "$request"
+code=`curl --header "$auth_header" \
+     --data "$request" \
+     https://api.github.com/repos/Erdwolf/scala-on-circle/releases \
+     -o response.json \
+     -w '%{http_code}'`
+
+echo "HTTP Code: $code"
+
+# Assert response code
+[ $code -eq 201 ] || {
+  cat response.json
+  exit 1
+}
+
+# Pretty-print the response
+python -m json.tool response.json
+
+upload_url=`python -c 'import json; print json.load(file("response.json"))["upload_url"].format(**{"?name,label": ""})'`
+
+echo
+echo "Uploading asset to $upload_url..."
+echo
+
+code=`curl --header "$auth_header" \
+     --header "Content-Type: application/java-archive" \
+     --data @"$1" \
+     $upload_url?name=foo.jar \
+     -o response.json \
+     -w '%{http_code}'`
+
+echo "HTTP Code: $code"
+
+# Assert response code
+[ $code -eq 201 ] || {
+  cat response.json
+  exit 1
+}
+
+# Pretty-print the response
+python -m json.tool response.json
