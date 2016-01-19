@@ -34,7 +34,7 @@ python -m json.tool response.json
 upload_url=`python -c 'import json; print json.load(file("response.json"))["upload_url"].format(**{"?name,label": ""})'`
 
 
-name=`basename $asset_path`
+asset_name="`basename $asset_path`"
 echo
 echo "Uploading $asset_name to $upload_url..."
 echo
